@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body{
+    background-color:#545454;
+    font-family: "Poppins", sans-serif;
+ 
+   
+}
+.card-general{
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    margin: 50px 30px 30px 30px;
+
+}
+
+.blockquote-custom {
+    position: relative;
+    font-size: 2.1rem;
+}
+.blockquote-custom-icon {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -55px;
+    left: 15px;
+    padding: 5px;
+}
+
+
+@import "~bootstrap/dist/css/bootstrap.css"
