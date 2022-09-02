@@ -1,0 +1,45 @@
+{
+    "nombre": "Lanfranco Darel Caballero",
+    "titulo": "Full Stack Web Developer Jr.",
+    "ubicacion": "Córdoba, Argentina",
+    "fotoPerfil": "assets/img/yo.png",
+    "experiencia":[{
+        "logo":"https://play-lh.googleusercontent.com/JFyN7p2M4v7UeZis2hRqqDMTudTG2vAYA75ELRMJ-qQhgNt25H4QmkozkNV1O71tKn0=s128-rw","titulo":"Desire - App de citas y chat","texto":"CEO, programador y fundador de Desire - App de citas y chat.","texto2":"Principal responsable del mantenimiento y funcionamiento.","link":"https://play.google.com/store/apps/details?id=com.monarca.desire"},
+        {"logo":"assets/img/monarca1.jpg","titulo":"Monarca Designs","texto":"CEO, Fundador, programador.","texto2":"Estudio para el desarrollo de soluciones basados en internet y la web.","link":"mailto:roc666@protonmail.com"
+    }],
+    "eduacion":[{
+        "tiempoInicio":"",
+        "tiempoFin":"2018",
+        "titulo":"Secundario C.e.n.m.a. No 217",
+        "texto":"Especialidad en Economía y Administración.",
+        "logo":""
+    },
+    {
+        "tiempoInicio":"2017",
+        "tiempoFin":"Incompleto",
+        "titulo":"Cisco CCNA - Academia Cisco Oracle UTN Córdoba",
+        "texto":"Certificación Cisco Certified Network Associated",
+        "logo":"https://upload.wikimedia.org/wikipedia/commons/6/67/UTN_logo.jpg"
+    },
+    {
+        "tiempoInicio":"febrero",
+        "tiempoFin":"Marzo 2022",
+        "titulo":"Argentina Programa - #SéProgramar",
+        "texto":"Plan nacional de formación en programación.",
+        "logo":"https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1655937940/APLogo-20-20.png"
+    },
+    {
+        "tiempoInicio":"2022",
+        "tiempoFin":"Presente",
+        "titulo":"Argentina Programa - #YoProgramo",
+        "texto":"Certificado Programador Web Full-Stack Junior",
+        "logo":"https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1655937940/APLogo-20-20.png"
+    },
+    {
+        "tiempoInicio":"2022",
+        "tiempoFin":"Presente",
+        "titulo":"Codo a codo 4.0",
+        "texto":"Full Stack Java",
+        "logo":"https://codoacodo.bue.edu.ar/images/logocodoacodo.png"
+    }]
+}
