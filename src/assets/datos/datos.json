@@ -3,6 +3,10 @@
     "titulo": "Full Stack Web Developer Jr.",
     "ubicacion": "Córdoba, Argentina",
     "fotoPerfil": "assets/img/yo.png",
+    "acercade":[{
+    "titulo":"Desarrollador web",
+    "texto":"Programador Front-End y Back-End con la experiencia de llevar a cabo proyectos de una forma organizada y eficiente."
+    }],
     "experiencia":[{
         "logo":"https://play-lh.googleusercontent.com/JFyN7p2M4v7UeZis2hRqqDMTudTG2vAYA75ELRMJ-qQhgNt25H4QmkozkNV1O71tKn0=s128-rw","titulo":"Desire - App de citas y chat","texto":"CEO, programador y fundador de Desire - App de citas y chat.","texto2":"Principal responsable del mantenimiento y funcionamiento.","link":"https://play.google.com/store/apps/details?id=com.monarca.desire"},
         {"logo":"assets/img/monarca1.jpg","titulo":"Monarca Designs","texto":"CEO, Fundador, programador.","texto2":"Estudio para el desarrollo de soluciones basados en internet y la web.","link":"mailto:roc666@protonmail.com"

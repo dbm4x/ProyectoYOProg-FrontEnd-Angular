@@ -20,9 +20,9 @@
         <div class="col-5" >
            <div class="card mt-3 mb-3">
               <div class="card-header">Acerca de ...</div>
-              <div class="card-body ">
-                 <h5 class="card-title">Desarrollador web</h5>
-                 <p class="card-text">Programador Front-End y Back-End con la experiencia de llevar a cabo proyectos de una forma organizada y eficiente.</p>
+              <div *ngFor="let acerca of miPortafolio.acercade" class="card-body ">
+                 <h5 class="card-title">{{acerca.titulo}}</h5>
+                 <p class="card-text">{{acerca.texto}}</p>
               </div>
            </div>
         </div>

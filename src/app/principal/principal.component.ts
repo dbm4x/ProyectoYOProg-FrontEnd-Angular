@@ -15,7 +15,7 @@ export class PrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.datos.ObtenerDatos().subscribe(data => {
     this.miPortafolio = data;
-    console.log(data);
+   
     });
   }
   }
