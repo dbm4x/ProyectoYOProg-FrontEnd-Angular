@@ -12,66 +12,25 @@
                     <div class="col-lg-6 m-15px-tb">
                         <div class="resume-box">
                             <ul>
-                                <li data-aos="fade-up" data-aos-duration="600">
-                             
-                                    <div class="icon">
-                                       <i class="fas fa-user-graduate"></i>
-                                   </div>
-                              
-                                    
-                                    
-                                    <span class="time"> - 2017</span>
-                                    <h5>Secundario C.e.n.m.a. No 217</h5>
-                                    <p>Especialidad en Economía y Administración.</p>
-                      
-                           
-                                </li>
-                            
-                                <li data-aos="fade-up" data-aos-duration="600">
-                                    <div class="icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-9">
-                                    <span class="time">2017 - Incompleto</span>
-                                    <h5>Cisco CCNA - Academia Cisco Oracle UTN Córdoba</h5>
-                                    <p>Certificación Cisco Certified Network Associated</p>
-                                 </div>
-                                    <div class="col box3" data-aos="flip-right">
-                                       <img src="https://www.frc.utn.edu.ar/imagenes/utnfrc46.png" alt="">
-                                    </div>
-                                 </div>
-                                </li>
-                                <li data-aos="fade-up" data-aos-duration="600">
+
+                                <li  *ngFor="let educacion of eduacionList" data-aos="fade-up" data-aos-duration="600">
                                     <div class="icon">
                                         <i class="fas fa-user-graduate"></i>
                                     </div>
                                     <div class="row">
                                        <div class="col-9">
-                                    <span class="time">febrero - marzo 2022</span>
-                                    <h5>Argentina Programa - #SéProgramar</h5>
-                                    <p>Plan nacional de formación en programación.</p>
+                                        <span class="time">{{educacion.tiempoInicio}} - {{educacion.tiempoFin}}</span>
+                                    <h5>{{educacion.titulo}}</h5>
+                                    <p>{{educacion.texto}}</p>
                                  </div>
-                                 <div class="col box3" data-aos="flip-right">
-                                    <img src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1655937940/APLogo-20-20.png" alt="" width="60" height="38" class="logo-img">
-                                 </div>
-                              </div>
-                                </li>
-                                <li data-aos="fade-up" data-aos-duration="600">
-                                    <div class="icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-9">
-                                    <span class="time">2022 - Presente</span>
-                                    <h5>Argentina Programa - #YoProgramo</h5>
-                                    <p>Certificado Programador Web Full-Stack Junior</p>
-                                 </div>
+                                 <ng-container *ngIf="educacion.logo">
                                  <div class="col box3 " data-aos="flip-right">
-                                    <img src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1655937940/APLogo-20-20.png" alt="" width="60" height="38" class="logo-img">
+                                    <img [src]="educacion.logo" alt="{{educacion.titulo}}" width="60" height="38" class="logo-img">
                                  </div>
+                                </ng-container>
                               </div>
                                 </li>
+
                             </ul>
                         </div>
                     </div>

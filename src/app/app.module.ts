@@ -11,6 +11,7 @@ import { EducacionComponent } from './educacion/educacion.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -29,7 +30,8 @@ import { PrincipalComponent } from './principal/principal.component';
     
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   
   providers: [],

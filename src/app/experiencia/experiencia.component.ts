@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PortafolioService } from '../Servicios/portafolio.service';
 
-declare var ParticleNetwork: any;
+
 
 
 @Component({
@@ -10,18 +11,13 @@ declare var ParticleNetwork: any;
 })
 export class ExperienciaComponent implements OnInit {
 
-  constructor() { }
+  experienciaList:any;
+
+  constructor(private datos:PortafolioService) { }
 
   ngOnInit(): void {
-    var canvasDiv = document.getElementById('particle-canvas');
-    var options = {
-      particleColor: '#ffff1f',
-      background: 'assets/img/banner.jpg',
-      interactive: true,
-      speed: 'slow',
-      density: 'high'
-    };
-    var particleCanvas = new ParticleNetwork(canvasDiv, options);
-  }
-
+  this.datos.ObtenerDatos().subscribe(data => {
+  this.experienciaList = data.experiencia;
+  })
+ }
 }
