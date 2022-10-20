@@ -1,129 +1,326 @@
-<div id="skills">
-<div class="card-general">
-    <div class="card-body">
-       <blockquote class="blockquote blockquote-custom bg-white px-3 pt-3" data-aos="flip-up">
-          <div class="blockquote-custom-icon bg-info shadow-1-strong">
-             <i class="text-white">Hard & Soft Skills</i>
-          </div>
-       </blockquote>
-       <div class="container text-center">
-        
-          <div class="row">
-             <div class="col-md-3">
-                <p>    
-                <div class="progress blue mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">80%</div>
-                </div>
-            
-                <p><h3>C#</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress cyan mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">75%</div>
-                </div>
-                
-                <p><h3>MySQL</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress red mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">80%</div>
-                </div>
-                
-                <p><h3>Java</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress green mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">75%</div>
-                </div>
-                
-                <p><h3>PHP</h3>
-             </div>
-          </div>
-          <div class="row mt-4">
-             <div class="col-md-3">
-                <p>    
-                <div class="progress violet mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">65%</div>
-                </div>
-                
-                <p><h3>Python</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress orange mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">90%</div>
-                </div>
-                
-                <p><h3>Javascript/CSS/HTML</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress teal mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">75%</div>
-                </div>
-              
-                <p><h3>Linux</h3>
-             </div>
-             <div class="col-md-3">
-                <p>    
-                <div class="progress yellow mx-auto">
-                   <span class="progress-left">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <span class="progress-right">
-                   <span class="progress-bar"></span>
-                   </span>
-                   <div class="progress-value">75%</div>
-                </div>
-                
-                <p><h3>Android</h3>
-             </div>
-          </div>
-       </div>
+<ng-template #crear let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Agregar Skill</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
     </div>
-</div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="text-center">
+          <img
+            onload="this.style.display=''"
+            onerror="this.style.display = 'none'"
+            [src]="imageSrc"
+            width="60px"
+            height="60px"
+          />
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Nombre skill:</label
+          >
+          <input
+            type="text"
+            [ngClass]="{ 'is-invalid': Nombre?.errors && Nombre?.touched }"
+            class="form-control"
+            formControlName="nombre"
+          />
+          <div *ngIf="Nombre?.errors && Nombre?.touched">
+            <p *ngIf="Nombre?.hasError('required')" class="text-danger">
+              Ingrese un nombre de skill.
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <textarea class="form-control" formControlName="texto"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Logo URL: (<mark style="background-color:yellow;">Utilizar imágenes con transparencia</mark>)</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="logo"
+              placeholder="Ej. https://... /logo.png"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <div class="form-control">
+            <label for="customRange3" class="form-label"
+              >Porcentaje: <b><output name="valor"></output></b
+            ></label>
+            <input
+              type="range"
+              class="form-range"
+              min="1"
+              max="100"
+              step="1"
+              formControlName="porcentaje"
+              onload="this.form.valor.value=this.value"
+              oninput="this.form.valor.value=this.value+'%'"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <div class="form-control">
+            <label for="exampleColorInput" class="form-label"
+              >Color skill:</label
+            >
+            <input
+              formControlName="color"
+              type="color"
+              class="form-control form-control-color"
+              id="exampleColorInput"
+              value="#ffff1f"
+              title="Elegir color"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar Skill</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="text-center">
+          <img
+            onload="this.style.display=''"
+            onerror="this.style.display = 'none'"
+            [src]="imageSrc"
+            width="60px"
+            height="60px"
+          />
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Nombre skill:</label
+          >
+          <input
+            type="text"
+            [ngClass]="{ 'is-invalid': Nombre?.errors && Nombre?.touched }"
+            class="form-control"
+            formControlName="nombre"
+          />
+          <div *ngIf="Nombre?.errors && Nombre?.touched">
+            <p *ngIf="Nombre?.hasError('required')" class="text-danger">
+              Ingrese un nombre de skill.
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <textarea class="form-control" formControlName="texto"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Logo URL: (<mark style="background-color:yellow;">Utilizar imágenes con transparencia</mark>)</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="logo"
+              placeholder="Ej. https://... /logo.png"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <div class="form-control">
+            <label for="customRange3" class="form-label"
+              >Porcentaje: <b><output name="valor"></output></b
+            ></label>
+            <input
+              type="range"
+              class="form-range"
+              min="1"
+              max="100"
+              step="1"
+              formControlName="porcentaje"
+              onload="this.form.valor.value=this.value"
+              oninput="this.form.valor.value=this.value+'%'"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <div class="form-control">
+            <label for="exampleColorInput" class="form-label"
+              >Color skill:</label
+            >
+            <input
+              formControlName="color"
+              type="color"
+              class="form-control form-control-color"
+              id="exampleColorInput"
+              value="#ffff1f"
+              title="Elegir color"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+<ng-template #mborrar let-modal>
+  <div class="modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="modal.dismiss('Cross click')"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Está seguro que desea eliminar esta skill?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-info" (click)="modal.dismiss('Cross click')"
+          >Cancelar</a
+        >
+        <a (click)="modal.close('ok')" class="btn btn-danger">Si, borrar!</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div id="skills">
+  <div class="card-general">
+    <div
+      *ngIf="Logged"
+      class="float-end mt-1"
+      style="position: relative; z-index: 1"
+    >
+      <a class="button" (click)="Crear()" class="btn btn-outline-dark btn-sm"
+        ><i class="fa-sharp fa-solid fa-plus"></i> Agregar</a
+      >
+    </div>
+    <div class="card-body">
+      <blockquote
+        class="blockquote blockquote-custom bg-white px-3 pt-3"
+        data-aos="flip-up"
+      >
+        <div class="blockquote-custom-icon bg-info shadow-1-strong">
+          <i class="text-white">Hard & Soft Skills</i>
+        </div>
+      </blockquote>
+      <div class="container">
+
+
+        <div class="categories" cdkDropListGroup>
+          <ng-container *ngFor="let item of skillsList;let i=index">
+            <div class="categories-item" cdkDropList  cdkDropListOrientation="horizontal"
+              [cdkDropListData]="{item:item,index:i}" (cdkDropListDropped)="drop($event)">
+              <div class="inner" cdkDrag cdkDragDisabled="{{ !Logged }}">
+                <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                
+                <div
+                *ngIf="Logged"
+                class="position-absolute"
+                style="right: 0;">
+                <a
+                  class="button"
+                  placement="top"
+                  ngbTooltip="Editar"
+                  (click)="editar(i)"
+                  ><i
+                    class="fa-solid fa-pencil"
+                    style="margin-right: 0.3em"
+                  ></i
+                ></a>
+                <a
+                  class="button"
+                  placement="top"
+                  ngbTooltip="Eliminar"
+                  (click)="borrar(item.id, item)"
+                  ><i class="far fa-trash-alt cercle-icons trash-icon"></i
+                ></a>
+              </div>
+                 <p>    
+                 <div class="progress mx-auto">
+                
+                    <span class="progress-left">
+                    <span class="progress-bar {{item.porcentaje > 50 ? 'is-big' : ''}}" style="--porcentaje: {{(item.porcentaje-50) * 360 / 100}}deg;" [style.border-color]=item.color></span>
+                    </span>
+                    <span class="progress-right">
+                    <span class="progress-bar {{item.porcentaje > 50 ? 'is-big' : ''}}" style="--porcentaje: {{item.porcentaje * 360 / 100}}deg;" [style.border-color]=item.color></span>
+                    </span>
+                  
+                    <div class="progress-value" >
+                      <div style="    position: absolute;
+                       bottom: 1%;
+                      left: 5%;
+                      right: 5%;
+                    
+                      ">
+                      <img  *ngIf="item.logo"  onload="this.style.display=''"
+                      onerror="this.src='assets/img/skill.png'"
+                      [src]="item.logo" width="60px" height="60px"><p>{{item.porcentaje}}%</p></div>
+                    </div>
+                 </div>
+                 
+               <p><h3>{{item.nombre}}</h3><p class="text-secondary">{{item.texto}}</p>
+              </div>
+            </div>
+              
+       
+          </ng-container>
+        </div>
+
+
+          </div>
+         
+        </div>
+        <p *ngIf="Logged"
+          >* Arrastre los objetos para cambiar su posición.</p
+        >
+      </div>
+    </div>

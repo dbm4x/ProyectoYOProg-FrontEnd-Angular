@@ -1,11 +1,12 @@
+
 <header>
     
    <div class="navbar navbar-expand-md navbar-dark bg-dark"> 
        
-       <div class="navbar-brand">
+       <div class="navbar-brand" >
         <div class="d-flex justify-content-start align-items-baseline">
             
-<div>  <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa">     <img src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1655937940/APLogo-20-20.png" width="105" height="65" alt="Argentina Programa">
+<div>  <a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa">     <img src="/assets/img/arg.png" alt="Argentina Programa">
 </a> </div>
 <div><h6 class="text-secondary">#YoProgramo</h6></div>
         </div>        
@@ -37,7 +38,8 @@
              <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/psychobillybaby"><i class="fab fa-facebook-f fa-2x"></i></a></li>
              <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/psychobillybaby"><i class="fab fa-instagram fa-2x"></i></a></li>
              <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-twitter fa-2x"></i></a></li>
-             <button class="btn btn-success btn-lg mx-3" data-bs-toggle="modal" data-bs-target="#loginm">Login</button>
+             <button *ngIf="Logged" class="btn btn-success btn-lg mx-3" (click)="logout()">Logout</button>
+             <button  *ngIf="!Logged" class="btn btn-success btn-lg mx-3" (click)="openLoginForm()">Login</button>
 
            </ul>
        </div>

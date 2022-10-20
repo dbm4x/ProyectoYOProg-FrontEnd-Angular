@@ -1,41 +1,385 @@
-<div id="educacion">
-<div class="card-general">
-            <div class="card-body">
-               <blockquote class="blockquote blockquote-custom bg-white px-3 pt-3" >
-                  <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                     <i class="text-white">Educación</i>
-                  </div>
-               </blockquote>
-               <div class="container">
-     
-                <div class="row">
-                    <div class="col-lg-6 m-15px-tb">
-                        <div class="resume-box">
-                            <ul>
-
-                                <li  *ngFor="let educacion of eduacionList" data-aos="fade-up" data-aos-duration="600">
-                                    <div class="icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-9">
-                                        <span class="time">{{educacion.tiempoInicio}} - {{educacion.tiempoFin}}</span>
-                                    <h5>{{educacion.titulo}}</h5>
-                                    <p>{{educacion.texto}}</p>
-                                 </div>
-                                 <ng-container *ngIf="educacion.logo">
-                                 <div class="col box3 " data-aos="flip-right">
-                                    <img [src]="educacion.logo" alt="{{educacion.titulo}}" width="60" height="38" class="logo-img">
-                                 </div>
-                                </ng-container>
-                              </div>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
+<ng-template #edit let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
     </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="text-center">
+          <img
+            onload="this.style.display=''"
+            onerror="this.style.display = 'none'"
+            [src]="imageSrc"
+            width="60px"
+            height="60px"
+          />
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label">Título:</label>
+          <input
+            [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
+            type="text"
+            class="form-control"
+            formControlName="titulo"
+          />
+          <div *ngIf="Titulo?.errors && Titulo?.touched">
+            <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+              Ingrese un título.
+            </p>
+            <p *ngIf="Titulo?.errors?.['maxlength']" class="text-danger">
+              El texto no debe superar los 80 carácteres.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <textarea
+            [ngClass]="{ 'is-invalid': Texto?.errors && Texto?.touched }"
+            class="form-control"
+            formControlName="texto"
+          ></textarea>
+          <div *ngIf="Texto?.errors && Texto?.touched">
+            <p *ngIf="Texto?.hasError('required')" class="text-danger">
+              Ingrese un texto.
+            </p>
+            <p *ngIf="Texto?.errors?.['maxlength']" class="text-danger">
+              El texto no debe superar los 150 carácteres.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Logo URL:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="logo"
+              placeholder="Ej. https://... /logo.png"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Fecha inicio:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_inicio">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Fecha fin:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_fin">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #crear let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Agregar educación</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="text-center">
+          <img
+            onload="this.style.display=''"
+            onerror="this.style.display = 'none'"
+            [src]="imageSrc"
+            width="60px"
+            height="60px"
+          />
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label">Título:</label>
+          <input
+            [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
+            type="text"
+            class="form-control"
+            formControlName="titulo"
+          />
+          <div *ngIf="Titulo?.errors && Titulo?.touched">
+            <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+              Ingrese un título.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <textarea class="form-control" formControlName="texto"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Logo URL:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="logo"
+              placeholder="Ej. https://... /logo.png"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Fecha inicio:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_inicio">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Fecha fin:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_fin">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #mborrar let-modal>
+  <div class="modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="modal.dismiss('Cross click')"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Está seguro que desea eliminar esta información?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-info" (click)="modal.dismiss('Cross click')"
+          >Cancelar</a
+        >
+        <a (click)="modal.close('ok')" class="btn btn-danger">Si, borrar!</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div id="educacion">
+  <div class="card-general">
+    <div
+      *ngIf="Logged"
+      class="float-end mt-1"
+      style="position: relative; z-index: 1"
+    >
+      <a class="button" (click)="Crear()" class="btn btn-outline-dark btn-sm"
+        ><i class="fa-sharp fa-solid fa-plus"></i> Agregar</a
+      >
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote blockquote-custom bg-white px-3 pt-3" >
+        <div class="blockquote-custom-icon bg-info shadow-1-strong">
+          <i class="text-white">Educación</i>
+        </div>
+      </blockquote>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 m-15px-tb">
+            <div class="resume-box ">
+              <ul cdkDropList (cdkDropListDropped)="drop($event)">
+                <li
+                  *ngFor="let educacion of educacionList; let i = index"
+                  cdkDrag
+                  cdkDragDisabled="{{ !Logged }}"
+                  class="resume-box "
+                >
+                  <div
+                    *ngIf="Logged"
+                    class="position-absolute"
+                    style="right: 0px"
+                  >
+                    <a
+                      class="button"
+                      placement="top"
+                      ngbTooltip="Editar"
+                      (click)="editar(i)"
+                      ><i
+                        class="fa-solid fa-pencil"
+                        style="margin-right: 0.3em"
+                      ></i
+                    ></a>
+                    <a
+                      class="button"
+                      placement="top"
+                      ngbTooltip="Eliminar"
+                      (click)="borrar(educacion.id, educacion)"
+                      ><i class="far fa-trash-alt cercle-icons trash-icon"></i
+                    ></a>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-user-graduate"></i>
+                  </div>
+                  <div class="row">
+                    <div class="col-9">
+                      <span class="time"
+                        >{{ educacion.fecha_inicio }} -
+                        {{ educacion.fecha_fin }}</span
+                      >
+                      <h5>{{ educacion.titulo }}</h5>
+                      <p>{{ educacion.texto }}</p>
+                    </div>
+                    <ng-container *ngIf="educacion.logo">
+                      <div class="col box3" data-aos="flip-right">
+                        <img
+                          onload="this.style.display=''"
+                          onerror="this.style.display = 'none'"
+                          [src]="educacion.logo"
+                          alt="{{ educacion.titulo }}"
+                          width="60"
+                          height="38"
+                        />
+                      </div>
+                    </ng-container>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <p *ngIf="Logged"
+      >* Arrastre los objetos para cambiar su posición.</p
+    >
+  </div>
+</div>

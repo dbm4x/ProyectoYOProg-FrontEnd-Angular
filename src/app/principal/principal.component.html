@@ -1,31 +1,512 @@
- <div id="inicio">
-  
- <div class="card-portada">
-  
+<ng-template #portada let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar portada</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="text-center">
+          <img
+            onload="this.style.display=''"
+            onerror="this.style.display = 'none'"
+            [src]="imageSrc"
+            width="350px"
+            height="80px"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Foto URL:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="foto_portada"
+              placeholder="Ej. https://... /logo.png"
+            />
+          </div>
+        </div>
+
+        <div class="form-check mt-1">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="canvas"
+            id="flexCheckDefault"
+          />
+          <label class="form-check-label" for="activar">Activar canvas</label>
+        </div>
+
+        <a
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+          <i class="fa-solid fa-plus"></i> Opciones avanzadas
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="form-control">
+            <label for="exampleColorInput" class="form-label"
+              >Color partícula:</label
+            >
+            <input
+              formControlName="particula"
+              type="color"
+              class="form-control form-control-color"
+              id="exampleColorInput"
+              value="#ffff1f"
+              title="Elegir color"
+            />
+          </div>
+          <div class="form-control">
+            <div class="form-check">
+              <label class="form-check-label" for="interactivo">
+                Interactivo
+              </label>
+              <input
+                formControlName="interactivo"
+                class="form-check-input"
+                checked
+                type="checkbox"
+                value=""
+                id="interactivo"
+              />
+            </div>
+          </div>
+          <div class="form-control">
+            <label class="select-label" for="selecc">Velocidad</label>
+            <select class="form-select" formControlName="velocidad" id="selecc">
+              <option value="slow">Lento</option>
+              <option value="fast">Rápido</option>
+              <option value="none">Ninguna</option>
+            </select>
+          </div>
+
+          <div class="form-control">
+            <label class="select-label" for="selecc">Densidad</label>
+            <select class="form-select" id="selecc" formControlName="densidad">
+              <option value="low">Bajo</option>
+              <option value="high">Máximo</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #persona let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">
+        Editar datos personales
+      </h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Nombres:</label
+          >
+          <input
+            type="text"
+            [ngClass]="{ 'is-invalid': Nombre?.errors && Nombre?.touched }"
+            class="form-control"
+            formControlName="nombre"
+          />
+          <div *ngIf="Nombre?.errors && Nombre?.touched">
+            <p *ngIf="Nombre?.hasError('required')" class="text-danger">
+              Ingrese un nombre.
+            </p>
+            <p *ngIf="Nombre?.hasError('pattern')" class="text-danger">
+              Ingrese solo letras.
+            </p>
+            <p *ngIf="Nombre?.errors?.['maxlength']" class="text-danger">
+              El nombre no puede ser mayor a 20 carácteres.
+            </p>
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <label for="recipient-name" class="form-control-label"
+            >Apellidos:</label
+          >
+          <input
+            type="text"
+            [ngClass]="{ 'is-invalid': Apellido?.errors && Apellido?.touched }"
+            class="form-control"
+            formControlName="apellido"
+          />
+          <div *ngIf="Apellido?.errors && Apellido?.touched">
+            <p *ngIf="Apellido?.hasError('required')" class="text-danger">
+              Ingrese un apellido.
+            </p>
+            <p *ngIf="Apellido?.hasError('pattern')" class="text-danger">
+              Ingrese solo letras.
+            </p>
+            <p *ngIf="Apellido?.errors?.['maxlength']" class="text-danger">
+              El apellido no puede ser mayor a 20 carácteres.
+            </p>
+          </div>
+        </div>
+        <div class="form-group mt-1">
+          <label for="recipient-name" class="form-control-label"
+            >Título profesional:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-solid fa-user-graduate"></i
+            ></span>
+            <input
+              type="text"
+              [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
+              class="form-control"
+              formControlName="titulo"
+            />
+          </div>
+          <div *ngIf="Titulo?.errors && Titulo?.touched">
+            <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+              Ingrese un título profesional.
+            </p>
+            <p *ngIf="Titulo?.hasError('pattern')" class="text-danger">
+              Ingrese solo letras o .,-'.
+            </p>
+            <p *ngIf="Titulo?.errors?.['maxlength']" class="text-danger">
+              El título profesional no puede ser mayor a 45 carácteres.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="recipient-name" class="form-control-label"
+            >Lugar de residencia:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-solid fa-house"></i
+            ></span>
+            <input
+              type="text"
+              [ngClass]="{
+                'is-invalid': Localidad?.errors && Localidad?.touched
+              }"
+              class="form-control"
+              formControlName="localidad"
+              placeholder="Ej. Córdoba, Argentina"
+            />
+          </div>
+          <div *ngIf="Localidad?.errors && Localidad?.touched">
+            <p *ngIf="Localidad?.hasError('required')" class="text-danger">
+              Ingrese un lugar de residencia.
+            </p>
+            <p *ngIf="Localidad?.hasError('pattern')" class="text-danger">
+              Ingrese solo letras o .,-'.
+            </p>
+            <p *ngIf="Localidad?.errors?.['maxlength']" class="text-danger">
+              El lugar de residencia no puede ser mayor a 40 carácteres.
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #fotoPerfil let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">
+        Editar imágen de perfil
+      </h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <span class="imagen_perfil">
+          <img
+            onload="this.style.display=''"
+            onerror="this.src='assets/img/noperfil.jpg'"
+            [src]="imageSrc"
+          />
+        </span>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Imágen URL:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-regular fa-image"></i
+            ></span>
+            <input
+              (ngModelChange)="readURL($event)"
+              type="text"
+              class="form-control"
+              formControlName="foto_perfil_url"
+              placeholder="Ej. https://... /yo.png"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label">Título:</label>
+          <div formGroupName="acercade">
+            <input
+              [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
+              type="text"
+              class="form-control"
+              formControlName="titulo"
+            />
+          </div>
+          <div *ngIf="Titulo?.errors && Titulo?.touched">
+            <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+              Ingrese un título.
+            </p>
+          </div>
+          <p *ngIf="Titulo?.errors?.['maxlength']" class="text-danger">
+            El título no debe superar los 45 carácteres.
+          </p>
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="recipient-name" class="form-control-label"
+            >Subtítulo:</label
+          >
+          <div formGroupName="acercade">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="subtitulo"
+            />
+          </div>
+          <p *ngIf="Subtitulo?.errors?.['maxlength']" class="text-danger">
+            El subtitulo no debe superar los 40 carácteres.
+          </p>
+        </div>
+        <div class="form-group mt-1">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <div formGroupName="acercade">
+            <textarea
+              rows="4"
+              class="form-control"
+              formControlName="texto"
+            ></textarea>
+          </div>
+          <p *ngIf="Texto?.errors?.['maxlength']" class="text-danger">
+            El texto no debe superar los 250 carácteres.
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<div id="inicio">
+  <div class="card-portada">
     <div class="upper">
-      <div id="particle-canvas"></div>
-     </div>
-     <div class="row">
-        <div class="col-4">
-           <div class="user mb-4">
-              <div class="profile">
-                 <img [src]="miPortafolio.fotoPerfil" class="rounded-circle" width="80">
-                 <h4 class="mb-0">{{miPortafolio.nombre}}</h4>
-                 <span class="font-italic">{{miPortafolio.titulo}}</span><br>
-                 <span class="text-muted">{{miPortafolio.ubicacion}}</span><span>&nbsp;</span>
-                 <span class="blink_me">_</span>
-              </div>
-           </div>
+      <div id="particle-canvas">
+        <div
+          style="
+            z-index: 25;
+            margin: 10px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          "
+        >
+          <button
+            *ngIf="Logged"
+            (click)="Portada()"
+            class="btn btn-success rounded-circle"
+            placement="top"
+            ngbTooltip="Editar"
+          >
+            <i class="fa fa-solid fa-pencil"></i>
+          </button>
         </div>
-        <div class="col-5" >
-           <div class="card mt-3 mb-3">
-              <div class="card-header">Acerca de ...</div>
-              <div *ngFor="let acerca of miPortafolio.acercade" class="card-body ">
-                 <h5 class="card-title">{{acerca.titulo}}</h5>
-                 <p class="card-text">{{acerca.texto}}</p>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div
+          class="col-4 col-sm-3 d-flex"
+          style="
+            min-height: 160px;
+            margin-left: 1.5%;
+            justify-content: space-evenly;
+          "
+        >
+          <div class="user">
+            <div class="profile">
+              <div *ngIf="Logged" (click)="foto_perfil()" class="hola">
+                <img
+                  class="profilepic__image"
+                  onerror="this.src='assets/img/noperfil.jpg'"
+                  [src]="miPortafolio.foto_perfil_url"
+                />
+                <div class="profilepic__content">
+                  <span class="profilepic__icon"
+                    ><i class="fas fa-camera"></i
+                  ></span>
+                  <span class="profilepic__text">Editar perfil</span>
+                </div>
               </div>
-           </div>
+
+              <div *ngIf="!Logged" class="hola">
+                <img
+                  onerror="this.src='assets/img/noperfil.jpg'"
+                  [src]="miPortafolio.foto_perfil_url"
+                />
+              </div>
+
+              <div>
+                <h4 style="display: inline" class="mb-0">
+                  {{miPortafolio.nombre}} {{miPortafolio.apellido}}
+                </h4>
+                <span *ngIf="Logged"
+                  >&nbsp;<a
+                    style="position: absolute"
+                    class="button"
+                    (click)="editar_persona()"
+                    placement="top"
+                    ngbTooltip="Editar"
+                    ><i class="fa fa-pencil"></i></a
+                ></span>
+              </div>
+
+              <span class="fst-italic">{{ miPortafolio.titulo }}</span
+              ><br />
+              <span class="text-muted">{{ miPortafolio.localidad }}</span
+              ><span>&nbsp;</span>
+              <span class="blink_me">_</span>
+            </div>
+          </div>
         </div>
-     </div>
- </div>
- </div>
+        <div class="col-5 offset-1">
+          <div
+            *ngIf="Logged || miPortafolio.acercade.visible"
+            class="card mt-3"
+          >
+            <div class="card-header">
+              {{ miPortafolio.acercade.titulo }}
+              <span *ngIf="Logged">
+                <span class="float-end"
+                  ><a
+                    (click)="editar()"
+                    class="button"
+                    placement="top"
+                    ngbTooltip="Editar"
+                    ><i class="fa fa-pencil" style="margin-right: 0.3em"></i></a
+                  ><a
+                    class="button"
+                    placement="top"
+                    (click)="visible(miPortafolio.id)"
+                    ngbTooltip="Mostrar/Ocultar en Inicio"
+                    ><i
+                      *ngIf="miPortafolio.acercade.visible"
+                      class="fa-solid fa-eye"
+                    ></i
+                    ><i
+                      *ngIf="!miPortafolio.acercade.visible"
+                      class="fa-sharp fa-solid fa-eye-slash"
+                    ></i
+                  ></a>
+                </span>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ miPortafolio.acercade.subtitulo }}
+              </h5>
+              <p class="card-text">
+                {{ miPortafolio.acercade.texto }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!---<div class="card mt-3 mb-3">
+               <div class="card-header">Acerca de ...</div>
+               <div *ngFor="let acerca of miPortafolio.acercade" class="card-body ">
+                  <h5 class="card-title">{{acerca.titulo}}</h5>
+                  <p class="card-text">{{acerca.texto}}</p>
+               </div>
+            </div>-->
+      </div>
+    </div>
+  </div>
+</div>
