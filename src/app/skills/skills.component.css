@@ -277,7 +277,7 @@ background-color: black;
 }
 
 .categories-item {
-  flex: 1 0 14rem; /* NEW */
+  flex: 1 0 20rem; /* NEW */
 
   text-align: center;
 

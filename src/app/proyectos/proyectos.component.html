@@ -1,169 +1,4 @@
 <ng-template #crear let-modal>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          (click)="modal.dismiss()"
-        >
-          &times;
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="form">
-          
-          
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Título:</label>
-            <input
-              [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
-              type="text"
-              class="form-control"
-              formControlName="titulo"
-            />
-            <div *ngIf="Titulo?.errors && Titulo?.touched">
-              <p *ngIf="Titulo?.hasError('required')" class="text-danger">
-                Ingrese un título.
-              </p>
-            </div>
-          </div>
-  
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label"
-              >Subtítulo:</label
-            >
-            <input type="text" class="form-control" formControlName="subtitulo" />
-          </div>
-          
-          <div class="form-group">
-          
-            <label for="message-text" class="form-control-label">Texto:</label>
-            <textarea class="form-control" formControlName="texto"></textarea>
-          </div>
-          <div class="form-group">
-  
-              <label for="recipient-name" class="form-control-label">Agregar imágenes:</label>
-             
-             
-              
-              
-                  <div formArrayName="proyectoLogo">
-                  <div *ngFor="let sport of formArr.controls; let i = index" [formGroupName]="i">
-                 
-             
-               <div class="input-group">
-                  <span class="input-group-text"
-                    ><img
-                    onerror="this.src='assets/img/folder.png'"
-                    [src]="logo.value"
-                    width="40px"
-                    height="40px"
-                  /></span>
-                 
-                  <input class="form-control" placeholder="URL imágen ... Ej: https://sitio.com/../logo.png" type="text" formControlName="logo" #logo>
-                  <div style=" display:flex;
-                  flex-direction:row;
-                  align-items:center;">
-                  <a
-                  class="button"
-                  placement="top"
-                  ngbTooltip="Eliminar"
-                  (click)="BorrarImagenes(i)"
-                  ><i class="fa-solid fa-x" style="color: red; margin-left: 
-                  0.3rem;"></i></a></div>
-                </div>
-              </div>
-              <a class="button" (click)="AgregarImagenes()"><i class="fa-solid fa-plus"></i> Agregar imágen</a>
-          </div>
-              </div>
-       
-          <div class="form-group">
-              <label class="form-control-label">Fecha inicio:</label>
-              <div style="border: solid rgb(227, 227, 227); border-style: solid">
-                <span>
-                  <label style="margin: 0.3em">Año:</label>
-                  <select formControlName="fecha_inicio">
-                    <option selected>Presente</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>
-                    <option>2013</option>
-                    <option>2012</option>
-                    <option>2011</option>
-                    <option>2010</option>
-                    <option>2009</option>
-                    <option value="">(Fecha indeterminada)</option>
-                  </select>
-                </span>
-              </div>
-            </div>
-    
-            <div class="form-group">
-              <label class="form-control-label">Fecha fin:</label>
-              <div style="border: solid rgb(227, 227, 227); border-style: solid">
-                <span>
-                  <label style="margin: 0.3em">Año:</label>
-                  <select formControlName="fecha_fin">
-                    <option selected>Presente</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>
-                    <option>2013</option>
-                    <option>2012</option>
-                    <option>2011</option>
-                    <option>2010</option>
-                    <option>2009</option>
-                    <option value="">(Fecha indeterminada)</option>
-                  </select>
-                </span>
-              </div>
-            </div>
-  
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label"
-              >Enlace URL:</label
-            >
-            <div class="input-group">
-              <span class="input-group-text"
-                ><i class="fa-solid fa-link"></i
-              ></span>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="link"
-                placeholder="Ej. https://www.pagina.com"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
-        <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
-          >Guardar</a
-        >
-      </div>
-    </div>
-  </ng-template>
-  
-
-<ng-template #edit let-modal>
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
@@ -178,8 +13,6 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="form">
-        
-        
         <div class="form-group">
           <label for="recipient-name" class="form-control-label">Título:</label>
           <input
@@ -201,104 +34,294 @@
           >
           <input type="text" class="form-control" formControlName="subtitulo" />
         </div>
-        
+
         <div class="form-group">
-        
           <label for="message-text" class="form-control-label">Texto:</label>
           <textarea class="form-control" formControlName="texto"></textarea>
         </div>
         <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Agregar imágenes:</label
+          >
 
-            <label for="recipient-name" class="form-control-label">Agregar imágenes:</label>
-           
-           
-            
-            
-                <div formArrayName="proyectoLogo">
-                <div *ngFor="let sport of formArr.controls; let i = index" [formGroupName]="i">
-               
-           
-             <div class="input-group">
+          <div formArrayName="proyectoLogo">
+            <div
+              *ngFor="let sport of formArr.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="input-group">
                 <span class="input-group-text"
                   ><img
-                  onerror="this.src='assets/img/folder.png'"
-                  [src]="logo.value"
-                  width="40px"
-                  height="40px"
+                    onerror="this.src='assets/img/folder.png'"
+                    [src]="logo.value"
+                    width="40px"
+                    height="40px"
                 /></span>
-               
-                <input class="form-control" placeholder="URL imágen ... Ej: https://sitio.com/../logo.png" type="text" formControlName="logo" #logo>
-                <div style=" display:flex;
-                flex-direction:row;
-                align-items:center;">
-                <a
-                class="button"
-                placement="top"
-                ngbTooltip="Eliminar"
-                (click)="BorrarImagenes(i)"
-                ><i class="fa-solid fa-x" style="color: red; margin-left: 
-                0.3rem;"></i></a></div>
+
+                <input
+                  class="form-control"
+                  placeholder="URL imágen ... Ej: https://sitio.com/../logo.png"
+                  type="text"
+                  formControlName="logo"
+                  #logo
+                />
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                  "
+                >
+                  <a
+                    class="button"
+                    placement="top"
+                    ngbTooltip="Eliminar"
+                    (click)="BorrarImagenes(i)"
+                    ><i
+                      class="fa-solid fa-x"
+                      style="color: red; margin-left: 0.3rem"
+                    ></i
+                  ></a>
+                </div>
               </div>
             </div>
-            <a class="button" (click)="AgregarImagenes()"><i class="fa-solid fa-plus"></i> Agregar imágen</a>
+            <a class="button" (click)="AgregarImagenes()"
+              ><i class="fa-solid fa-plus"></i> Agregar imágen</a
+            >
+          </div>
         </div>
-            </div>
-     
+
         <div class="form-group">
-            <label class="form-control-label">Fecha inicio:</label>
-            <div style="border: solid rgb(227, 227, 227); border-style: solid">
-              <span>
-                <label style="margin: 0.3em">Año:</label>
-                <select formControlName="fecha_inicio">
-                  <option selected>Presente</option>
-                  <option>2023</option>
-                  <option>2022</option>
-                  <option>2021</option>
-                  <option>2020</option>
-                  <option>2019</option>
-                  <option>2018</option>
-                  <option>2017</option>
-                  <option>2016</option>
-                  <option>2015</option>
-                  <option>2014</option>
-                  <option>2013</option>
-                  <option>2012</option>
-                  <option>2011</option>
-                  <option>2010</option>
-                  <option>2009</option>
-                  <option value="">(Fecha indeterminada)</option>
-                </select>
-              </span>
-            </div>
+          <label class="form-control-label">Fecha inicio:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_inicio">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
           </div>
-  
-          <div class="form-group">
-            <label class="form-control-label">Fecha fin:</label>
-            <div style="border: solid rgb(227, 227, 227); border-style: solid">
-              <span>
-                <label style="margin: 0.3em">Año:</label>
-                <select formControlName="fecha_fin">
-                  <option selected>Presente</option>
-                  <option>2023</option>
-                  <option>2022</option>
-                  <option>2021</option>
-                  <option>2020</option>
-                  <option>2019</option>
-                  <option>2018</option>
-                  <option>2017</option>
-                  <option>2016</option>
-                  <option>2015</option>
-                  <option>2014</option>
-                  <option>2013</option>
-                  <option>2012</option>
-                  <option>2011</option>
-                  <option>2010</option>
-                  <option>2009</option>
-                  <option value="">(Fecha indeterminada)</option>
-                </select>
-              </span>
-            </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Fecha fin:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_fin">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Enlace URL:</label
+          >
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="fa-solid fa-link"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="link"
+              placeholder="Ej. https://www.pagina.com"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</a>
+      <a class="button" (click)="modal.close('ok')" class="btn btn-primary"
+        >Guardar</a
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        (click)="modal.dismiss()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label">Título:</label>
+          <input
+            [ngClass]="{ 'is-invalid': Titulo?.errors && Titulo?.touched }"
+            type="text"
+            class="form-control"
+            formControlName="titulo"
+          />
+          <div *ngIf="Titulo?.errors && Titulo?.touched">
+            <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+              Ingrese un título.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Subtítulo:</label
+          >
+          <input type="text" class="form-control" formControlName="subtitulo" />
+        </div>
+
+        <div class="form-group">
+          <label for="message-text" class="form-control-label">Texto:</label>
+          <textarea class="form-control" formControlName="texto"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="recipient-name" class="form-control-label"
+            >Agregar imágenes:</label
+          >
+
+          <div formArrayName="proyectoLogo">
+            <div
+              *ngFor="let sport of formArr.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><img
+                    onerror="this.src='assets/img/folder.png'"
+                    [src]="logo.value"
+                    width="40px"
+                    height="40px"
+                /></span>
+
+                <input
+                  class="form-control"
+                  placeholder="URL imágen ... Ej: https://sitio.com/../logo.png"
+                  type="text"
+                  formControlName="logo"
+                  #logo
+                />
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                  "
+                >
+                  <a
+                    class="button"
+                    placement="top"
+                    ngbTooltip="Eliminar"
+                    (click)="BorrarImagenes(i)"
+                    ><i
+                      class="fa-solid fa-x"
+                      style="color: red; margin-left: 0.3rem"
+                    ></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <a class="button" (click)="AgregarImagenes()"
+              ><i class="fa-solid fa-plus"></i> Agregar imágen</a
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Fecha inicio:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_inicio">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Fecha fin:</label>
+          <div style="border: solid rgb(227, 227, 227); border-style: solid">
+            <span>
+              <label style="margin: 0.3em">Año:</label>
+              <select formControlName="fecha_fin">
+                <option selected>Presente</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option value="">(Fecha indeterminada)</option>
+              </select>
+            </span>
+          </div>
+        </div>
 
         <div class="form-group">
           <label for="recipient-name" class="form-control-label"
@@ -373,105 +396,116 @@
           <i class="text-white">Proyectos</i>
         </div>
       </blockquote>
-      <div class="container">
-        <div class="categories" cdkDropListGroup>
-          <ng-container *ngFor="let item of proyectosList; let i = index">
-            <div
-              class="categories-item"
-              cdkDropList
-              cdkDropListOrientation="horizontal"
-              [cdkDropListData]="{ item: item, index: i }"
-              (cdkDropListDropped)="drop($event)"
-            >
-              <div cdkDrag cdkDragDisabled="{{ !Logged }}">
+
+      <div class="categories" cdkDropListGroup>
+        <ng-container *ngFor="let item of proyectosList; let i = index">
+          <div
+            cdkDropList
+            cdkDropListOrientation="vertical"
+            [cdkDropListData]="{ item: item, index: i }"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div cdkDrag cdkDragDisabled="{{ !Logged }}">
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+
+              <div
+                class="card"
+                style="margin-right: 30px; width: 20rem"
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+              >
                 <div
-                  class="example-custom-placeholder"
-                  *cdkDragPlaceholder
-                ></div>
-
-                <div class="card" style="width: 20rem" data-aos="zoom-in" data-aos-duration="1000">
-                  <div
-                    *ngIf="Logged"
-                    class="position-absolute"
-                    style="right: 0; z-index: 2"
+                  *ngIf="Logged"
+                  class="position-absolute"
+                  style="right: 0; z-index: 2"
+                >
+                  <button
+                    class="mt-1 btn btn-success btn-sm rounded-circle"
+                    placement="top"
+                    ngbTooltip="Editar"
+                    (click)="editar(i)"
+                    style="margin-right: 0.3em"
                   >
-                    <button
-                      class="mt-1 btn btn-success btn-sm rounded-circle"
-                      placement="top"
-                      ngbTooltip="Editar"
-                      (click)="editar(i)"
-                      style="margin-right: 0.3em">
-                      <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <button
-                      class="mt-1 btn btn-success btn-sm rounded-circle"
-                      placement="top"
-                      ngbTooltip="Eliminar"
-                      (click)="borrar(item.id, item)"
-                      style="margin-right: 0.1em">
-                      <i class="far fa-trash-alt cercle-icons trash-icon"></i>
-                    </button>
-                  </div>
-                  <div
-                    id="carouselExampleControls{{i}}"
-                    class="carousel slide"
-                    data-bs-ride="carousel"
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button
+                    class="mt-1 btn btn-success btn-sm rounded-circle"
+                    placement="top"
+                    ngbTooltip="Eliminar"
+                    (click)="borrar(item.id, item)"
+                    style="margin-right: 0.1em"
                   >
-                    <div class="carousel-inner">
-                     
-                        <div class="carousel-item" *ngFor="let kk of item.proyectoLogo; let i = index" [ngClass]="{'active': i === 0}">
-                            <img [src]="kk.logo" onerror="this.src='assets/img/folder.png'" class="mx-auto d-block img-thumbnail" style="height: 250px;">
-                        </div>
-                 
+                    <i class="far fa-trash-alt cercle-icons trash-icon"></i>
+                  </button>
+                </div>
+                <div
+                  id="carouselExampleControls{{ i }}"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div
+                      class="carousel-item"
+                      *ngFor="let kk of item.proyectoLogo; let i = index"
+                      [ngClass]="{ active: i === 0 }"
+                    >
+                      <img
+                        [src]="kk.logo"
+                        onerror="this.src='assets/img/folder.png'"
+                        class="mx-auto d-block img-thumbnail"
+                        style="height: 250px"
+                      />
                     </div>
-                    <button
-                      class="carousel-control-prev"
-                      type="button"
-                      [attr.data-bs-target]="'#carouselExampleControls'+i"
-                      data-bs-slide="prev"
-                    >
-                      <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                      ></span>
-                     
-                    </button>
-                    <button
-                      class="carousel-control-next"
-                      type="button"
-                      [attr.data-bs-target]="'#carouselExampleControls'+i"
-                      data-bs-slide="next"
-                    >
-                      <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                      ></span>
-                    
-                    </button>
                   </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    [attr.data-bs-target]="'#carouselExampleControls' + i"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    [attr.data-bs-target]="'#carouselExampleControls' + i"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                </div>
 
-                  <div class="card-body">
-                    <div class="fecha">{{item.fecha_inicio}} - {{item.fecha_fin}}</div>
-                    <h5 class="card-title">{{ item.titulo }}</h5>
-                    <p class="card-subtitle ytext-secondary fst-italic">
-                      {{ item.subtitulo }}
-                    </p>
-                    <p class="card-text">{{ item.texto }}</p>
+                <div class="card-body">
+                  <div class="fecha">
+                    {{ item.fecha_inicio }} - {{ item.fecha_fin }}
                   </div>
-                  <div class="card-body">
-                    <a *ngIf="item.link" href="{{item.link}}" class="card-link btn btn-primary"
-                      >Visitar</a
-                    >
-                  </div>
+                  <h5 class="card-title">{{ item.titulo }}</h5>
+                  <p class="card-subtitle ytext-secondary fst-italic">
+                    {{ item.subtitulo }}
+                  </p>
+                  <p class="card-text">{{ item.texto }}</p>
+                </div>
+                <div class="card-body">
+                  <a
+                    *ngIf="item.link"
+                    href="{{ item.link }}"
+                    class="card-link btn btn-primary"
+                    >Visitar</a
+                  >
                 </div>
               </div>
             </div>
-          </ng-container>
-        </div>
+          </div>
+        </ng-container>
       </div>
     </div>
-<br>
+    <br>
     <p *ngIf="Logged">* Arrastre los objetos para cambiar su posición.</p>
-
   </div>
 </div>

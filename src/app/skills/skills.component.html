@@ -252,14 +252,13 @@
           <i class="text-white">Hard & Soft Skills</i>
         </div>
       </blockquote>
-      <div class="container">
 
 
         <div class="categories" cdkDropListGroup>
           <ng-container *ngFor="let item of skillsList;let i=index">
-            <div class="categories-item" cdkDropList  cdkDropListOrientation="horizontal"
+            <div class="categories-item" style="margin: 20px; width: 18rem" cdkDropList  cdkDropListOrientation="horizontal"
               [cdkDropListData]="{item:item,index:i}" (cdkDropListDropped)="drop($event)">
-              <div class="inner" cdkDrag cdkDragDisabled="{{ !Logged }}">
+              <div class="inner"  cdkDrag cdkDragDisabled="{{ !Logged }}">
                 <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                 
                 <div
@@ -317,10 +316,7 @@
 
 
           </div>
-         
+          <br>
+          <p *ngIf="Logged">* Arrastre los objetos para cambiar su posición.</p>
         </div>
-        <p *ngIf="Logged"
-          >* Arrastre los objetos para cambiar su posición.</p
-        >
       </div>
-    </div>
